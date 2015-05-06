@@ -1,0 +1,287 @@
+@import 'icon';
+
+* {
+  margin: 0 auto;
+}
+
+a {
+  text-decoration: none;
+}
+
+html, body {
+  height: 100%;
+}
+
+#content {
+  height: 100%;
+  min-width: 800px;
+  min-height: 600px;
+  font-size: 3em;
+  text-align: center;
+}
+
+// TODO 要改良
+@mixin popover($class: 'popover') {
+  position: relative;
+
+  .#{$class} {
+    opacity: 0;
+    transition: opacity .2s linear;
+    position: absolute;
+    @content;
+  }
+
+  &:hover {
+    .#{$class} {
+      opacity: 1;
+    }
+  }
+}
+
+@mixin page {
+  position: relative;
+  min-height: 100%;
+  min-width: 100%;
+  color: #fff;
+
+  a {
+    color: #fff;
+  }
+
+  .nav {
+    position: absolute;
+    top: .2em;
+    right: .5em;
+
+    @mixin nav-link($icon) {
+      @include icon($icon) {
+        margin-left: .3em;
+      }
+    }
+    .main    { @include nav-link('hour-glass'); }
+    .setting { @include nav-link('cog');        }
+    .usage   { @include nav-link('question');   }
+    .info    { @include nav-link('info');       }
+
+    a {
+      opacity: .5;
+      transition: opacity .2s linear;
+
+      &:hover {
+        opacity: 1;
+      }
+
+      //@include popover {
+      //  left: -50%;
+      //  bottom: -1.5em;
+      //}
+      .popover {
+        display: none;
+      }
+    }
+  }
+
+  .pageContent {
+    padding: 1em 1.5em 1.5em;
+    text-align: left;
+
+    h2 {
+      margin-bottom: .5em;
+    }
+
+    h3 {
+      margin-top: 1em;
+      font-size: .8em;
+    }
+
+    p {
+      font-size: .7em;
+      margin-top: 1em;
+    }
+
+    code {
+      display: block;
+      background-color: #fff;
+      color: #333;
+      padding: .5em;
+      font-size: 2rem;
+    }
+  }
+}
+
+@mixin controller {
+  @mixin topic-button($icon) {
+    @include icon($icon);
+    margin: 0 .1em;
+  }
+  .play  { @include topic-button('play');  }
+  .pause { @include topic-button('pause'); }
+  .stop  { @include topic-button('stop');  }
+}
+
+#main {
+  @include page;
+
+  height: 100%;
+  background-color: #fff;
+  display: table;
+  color: #333;
+
+  a {
+    color: #333;
+  }
+
+  &.over {
+    background-color: #333;
+    color: #999;
+
+    .remainTime {
+      color: #f33;
+    }
+
+    a {
+      color: #fff;
+    }
+  }
+
+  .remainTime {
+    font-size: 5em;
+    font-family: monospace;
+    display: table-cell;
+    text-align: center;
+    vertical-align: middle;
+    height: 100%;
+  }
+
+  .topicInfo {
+    position: absolute;
+    top: .2em;
+    left: .5em;
+    text-align: left;
+    color: #999;
+
+    .description {
+      @include icon('bubbles') {
+        margin-right: .3em;
+      }
+    }
+
+    .entireTime {
+      @include icon('hour-glass') {
+        margin-right: .3em;
+      }
+    }
+  }
+
+  .controller {
+    @include controller;
+    position: absolute;
+    bottom: .2em;
+    left: .5em;
+
+    a {
+      opacity: .5;
+      transition: opacity .2s linear;
+      &:hover {
+        opacity: 1;
+      }
+    }
+  }
+
+  .bell {
+    position: absolute;
+    bottom: .2em;
+    right: .4em;
+    text-align: center;
+    width: 1.2em;
+    cursor: pointer;
+    opacity: .5;
+    transition: opacity .2s linear;
+
+    &.on  { @include icon('bell'); }
+    &.off { @include icon('bell-slash'); }
+
+    &:hover {
+      opacity: 1;
+    }
+  }
+
+}
+
+#setting {
+  @include page;
+
+  background-color: #39f;
+
+  h2 {
+    @include icon('cog') {
+      margin-right: .3em;
+    }
+  }
+
+  textarea {
+    width: 100%;
+    height: 10em;
+    padding: .5em;
+    font-size: 2rem;
+    color: #333;
+    border: 0;
+  }
+
+  .empty {
+    text-align: center;
+    padding: .5em;
+    cursor: pointer;
+    background-color: rgba(255,255,255,0);
+    transition: background-color .2s linear;
+
+    &:hover {
+      background-color: rgba(255,255,255,0.2);
+    }
+  }
+
+  .topic {
+    @include controller;
+
+    .time {
+      cursor: pointer;
+      font-family: monospace;
+      padding: 0 .5em;
+    }
+
+    .description {
+      cursor: pointer;
+      text-align: left;
+    }
+  }
+}
+
+#usage {
+  @include page;
+  background-color: #3f9;
+
+  h2 {
+    @include icon('question') {
+      margin-right: .3em;
+    }
+  }
+
+  .bellOn {
+    @include icon('bell');
+  }
+}
+
+#info {
+  @include page;
+  background-color: #f39;
+
+  h2 {
+    @include icon('info') {
+      margin-right: .3em;
+    }
+  }
+
+  .pageContent a {
+    text-decoration: underline;
+  }
+}

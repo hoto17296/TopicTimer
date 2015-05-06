@@ -1,0 +1,69 @@
+@font-face {
+  font-family: 'icon';
+  src: url('icon.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+}
+
+// http://jshak.es/easy-icomoon-icons-with-sass/
+@mixin icon($icon, $position: "before") {
+  &:#{$position} {
+    @extend .icon-#{$icon};
+    font-family: 'icon';
+    speak: none;
+    font-style: normal;
+    font-weight: normal;
+    font-variant: normal;
+    text-transform: none;
+    line-height: 1;
+    @content;
+  }
+}
+
+.icon-bell-slash:before {
+  content: "\e600";
+}
+
+.icon-bell:before {
+  content: "\e601";
+}
+
+.icon-bubbles:before {
+  content: "\e970";
+}
+
+.icon-hour-glass:before {
+  content: "\e979";
+}
+
+.icon-cog:before {
+  content: "\e994";
+}
+
+.icon-warning:before {
+  content: "\ea07";
+}
+
+.icon-question:before {
+  content: "\ea09";
+}
+
+.icon-info:before {
+  content: "\ea0c";
+}
+
+.icon-play:before {
+  content: "\ea15";
+}
+
+.icon-pause:before {
+  content: "\ea16";
+}
+
+.icon-stop:before {
+  content: "\ea17";
+}
+
+.icon-down:before {
+  content: "\ea43";
+}
