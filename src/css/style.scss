@@ -111,6 +111,9 @@ html, body {
 }
 
 @mixin controller {
+  a {
+    cursor: pointer;
+  }
   @mixin topic-button($icon) {
     @include icon($icon);
     margin: 0 .1em;
@@ -118,6 +121,8 @@ html, body {
   .play  { @include topic-button('play');  }
   .pause { @include topic-button('pause'); }
   .stop  { @include topic-button('stop');  }
+  .prev  { @include topic-button('prev');  }
+  .next  { @include topic-button('next');  }
 }
 
 #main {

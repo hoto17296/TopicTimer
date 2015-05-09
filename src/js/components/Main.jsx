@@ -26,7 +26,7 @@ module.exports = React.createClass({
           <div className='entireTime'>{selected ? selected.entire.toString() : ''}</div>
         </div>
         <Nav current='main' />
-        {selected ? <Controller topic={selected} /> : ''}
+        {selected ? <Controller topic={selected} prev={true} next={true} /> : ''}
         <div className='bell'>
           <a className={this.props.bell ? 'on' : 'off'} onClick={this.toggleBell}>
             <span className='popover'>Bell</span>
