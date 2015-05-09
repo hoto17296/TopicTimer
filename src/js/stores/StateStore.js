@@ -7,6 +7,7 @@ var CHANGE_EVENT = 'change';
 
 var _states = {
   selected: null,
+  counting: false,
   bell: true,
 };
 

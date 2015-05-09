@@ -8,7 +8,6 @@ var Topic = function(str) {
   this.remain = time[0];
   this.entire = ( time.length < 2 ) ? clone(time[0]) : time[1];
   this.description = ( str.length < 2 ) ? '' : str[1];
-  this.counting = false;
   this.key = null;
 }
 

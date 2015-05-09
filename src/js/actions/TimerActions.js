@@ -23,12 +23,11 @@ module.exports = {
     this._scrollTop();
     _timer = setInterval(this.countDown, 1000);
     AppDispatcher.dispatch({
-      actionType: TimerConstants.START_COUNTING,
-      topic: topic
-    });
-    AppDispatcher.dispatch({
       actionType: TimerConstants.STATES_UPDATE,
-      states: { selected: topic }
+      states: {
+        selected: topic,
+        counting: true,
+      }
     });
   },
 
@@ -36,32 +35,38 @@ module.exports = {
   pauseCounting: function() {
     clearInterval(_timer);
     AppDispatcher.dispatch({
-      actionType: TimerConstants.PAUSE_COUNTING
+      actionType: TimerConstants.STATES_UPDATE,
+      states: {
+        counting: false,
+      }
     });
   },
 
   // カウントを停止する
   stopCounting: function(topic) {
-    if (topic.counting) {
-      clearInterval(_timer);
+    if ( topic.equal( StateStore.get().selected ) ) {
+      this.pauseCounting();
     }
     AppDispatcher.dispatch({
-      actionType: TimerConstants.STOP_COUNTING,
-      topic: topic
+      actionType: TimerConstants.RESET_TOPIC,
+      topic: topic,
     });
   },
 
   // カウントダウンする
   countDown: function(){
-    var bell = StateStore.get().bell;
-    AppDispatcher.dispatch({
-      actionType: TimerConstants.COUNTDOWN,
-      callback: function(remainTime){
-        if (remainTime === 0 && bell) {
-          audio.play();
+    var state = StateStore.get();
+    if (state.selected) {
+      AppDispatcher.dispatch({
+        actionType: TimerConstants.COUNTDOWN,
+        topic: state.selected,
+        callback: function(remainTime) {
+          if (remainTime === 0 && state.bell) {
+            audio.play();
+          }
         }
-      }
-    });
+      });
+    }
   },
 
   // Bell の ON/OFF を切り替える

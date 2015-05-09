@@ -1,6 +1,7 @@
 var React = require('react');
 var Topic = require('../utils/topic');
 var TimerActions = require('../actions/TimerActions');
+var StateStore = require('../stores/StateStore');
 
 module.exports = React.createClass({
 
@@ -17,8 +18,13 @@ module.exports = React.createClass({
     };
   },
 
+  isCounting: function() {
+    var state = StateStore.get();
+    return this.props.topic.equal( state.selected ) && state.counting;
+  },
+
   toggle: function() {
-    this.props.topic.counting ? this.pause() : this.start();
+    this.isCounting() ? this.pause() : this.start();
   },
 
   start: function() {
@@ -46,13 +52,12 @@ module.exports = React.createClass({
   },
 
   render: function() {
-    var topic = this.props.topic;
     var prev = this.props.prev ? <a className='prev' onClick={this.prev}></a> : '';
     var next = this.props.next ? <a className='next' onClick={this.next}></a> : '';
     return (
       <div className='controller'>
         {prev}
-        <a className={topic.counting ? 'pause' : 'play'} onClick={this.toggle}></a>
+        <a className={this.isCounting() ? 'pause' : 'play'} onClick={this.toggle}></a>
         <a className='stop' onClick={this.stop}></a>
         {next}
       </div>

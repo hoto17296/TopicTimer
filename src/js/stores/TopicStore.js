@@ -42,43 +42,20 @@ AppDispatcher.register(function(action) {
       }
       break;
 
-    case TimerConstants.START_COUNTING:
-      _topics = _topics.map(function(topic){
-        topic.counting = topic.key == action.topic.key;
-        return topic;
-      });
-      TopicStore.emitChange();
-      break;
-
-    case TimerConstants.PAUSE_COUNTING:
-      _topics = _topics.map(function(topic){
-        topic.counting = false;
-        return topic;
-      });
-      TopicStore.emitChange();
-      break;
-
-    case TimerConstants.STOP_COUNTING:
-      _topics = _topics.map(function(topic){
-        if (topic.key == action.topic.key) {
-          topic.counting = false;
-          topic.remain = clone(topic.entire);
+    case TimerConstants.RESET_TOPIC:
+      _topics.map(function(topic){
+        if ( topic.equal( action.topic ) ) {
+          topic.remain = clone( topic.entire );
         }
-        return topic;
       });
       TopicStore.emitChange();
       break;
 
     case TimerConstants.COUNTDOWN:
-      _topics = _topics.map(function(topic) {
-        if (topic.counting) {
-          var remainTime = topic.remain.decrease();
-          if (typeof(action.callback) == 'function') {
-            action.callback(remainTime);
-          }
-        }
-        return topic;
-      });
+      var remainTime = action.topic.remain.decrease();
+      if (typeof(action.callback) == 'function') {
+        action.callback(remainTime);
+      }
       TopicStore.emitChange();
       break;
 
