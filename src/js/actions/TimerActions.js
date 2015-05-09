@@ -73,17 +73,30 @@ module.exports = {
 
   // 文字列の各行をパースしてTopicオブジェクトを生成する
   _parseTopics: function(str){
+    var prev = null;
     return str
       .split("\n").filter(function(v){ return !! v.trim() }) // 改行で分割して空行を除去
       .map(function(v, idx){
         try {
+          // トピックオブジェクトを生成
           var topic = new Topic(v);
+
+          // ユニークキーを設定
+          topic.key = sha1( JSON.stringify([ topic.entire.toString(), topic.description, idx ]) );
+
+          // 前後のトピック情報を設定
+          if (prev) {
+            topic.prev = prev;
+            prev.next = topic;
+          }
+          topic.next = null;
+          prev = topic;
+
+          return topic;
         } catch (e) {
           console.warn(e);
           return;
         }
-        topic.key = sha1( JSON.stringify([ topic.entire.toString(), topic.description, idx ]) );
-        return topic;
       })
       .filter(function(v){ return !! v }); // パースできなかった行を除外
   },

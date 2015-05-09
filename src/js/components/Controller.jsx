@@ -33,8 +33,17 @@ module.exports = React.createClass({
     TimerActions.stopCounting(this.props.topic);
   },
 
-  prev: function() {},
-  next: function() {},
+  prev: function() {
+    if (this.props.topic.prev) {
+      TimerActions.startCounting(this.props.topic.prev);
+    }
+  },
+
+  next: function() {
+    if (this.props.topic.next) {
+      TimerActions.startCounting(this.props.topic.next);
+    }
+  },
 
   render: function() {
     var topic = this.props.topic;
