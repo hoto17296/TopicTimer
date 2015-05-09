@@ -39,6 +39,22 @@ html, body {
   }
 }
 
+@mixin icon-button {
+  a {
+    opacity: .5;
+    transition: opacity .2s linear;
+    cursor: pointer;
+
+    &:hover {
+      opacity: 1;
+    }
+
+    .popover {
+      display: none;
+    }
+  }
+}
+
 @mixin page {
   position: relative;
   min-height: 100%;
@@ -50,6 +66,7 @@ html, body {
   }
 
   .nav {
+    @include icon-button;
     position: absolute;
     top: .2em;
     right: .5em;
@@ -63,23 +80,6 @@ html, body {
     .setting { @include nav-link('cog');        }
     .usage   { @include nav-link('question');   }
     .info    { @include nav-link('info');       }
-
-    a {
-      opacity: .5;
-      transition: opacity .2s linear;
-
-      &:hover {
-        opacity: 1;
-      }
-
-      //@include popover {
-      //  left: -50%;
-      //  bottom: -1.5em;
-      //}
-      .popover {
-        display: none;
-      }
-    }
   }
 
   .pageContent {
@@ -176,35 +176,22 @@ html, body {
 
   .controller {
     @include controller;
+    @include icon-button;
     position: absolute;
     bottom: .2em;
     left: .5em;
-
-    a {
-      opacity: .5;
-      transition: opacity .2s linear;
-      &:hover {
-        opacity: 1;
-      }
-    }
   }
 
   .bell {
+    @include icon-button;
     position: absolute;
     bottom: .2em;
     right: .4em;
     text-align: center;
     width: 1.2em;
-    cursor: pointer;
-    opacity: .5;
-    transition: opacity .2s linear;
 
-    &.on  { @include icon('bell'); }
-    &.off { @include icon('bell-slash'); }
-
-    &:hover {
-      opacity: 1;
-    }
+    .on  { @include icon('bell'); }
+    .off { @include icon('bell-slash'); }
   }
 
 }
