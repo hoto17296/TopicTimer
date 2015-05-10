@@ -4,10 +4,10 @@
   font-weight: normal;
   font-style: normal; }
 
-.icon-bell-slash:before, #main .bell.off:before {
+.icon-bell-slash:before, #main .bell .off:before {
   content: "\e600"; }
 
-.icon-bell:before, #main .bell.on:before, #usage .bellOn:before {
+.icon-bell:before, #main .bell .on:before, #usage .bellOn:before {
   content: "\e601"; }
 
 .icon-bubbles:before, #main .topicInfo .description:before {
@@ -37,8 +37,11 @@
 .icon-stop:before, #main .controller .stop:before, #setting .topic .stop:before {
   content: "\ea17"; }
 
-.icon-down:before {
-  content: "\ea43"; }
+.icon-prev:before, #main .controller .prev:before, #setting .topic .prev:before {
+  content: "\ea18"; }
+
+.icon-next:before, #main .controller .next:before, #setting .topic .next:before {
+  content: "\ea19"; }
 
 * {
   margin: 0 auto; }
@@ -72,6 +75,14 @@ html, body {
     position: absolute;
     top: .2em;
     right: .5em; }
+    #main .nav a {
+      opacity: .5;
+      transition: opacity .2s linear;
+      cursor: pointer; }
+      #main .nav a:hover {
+        opacity: 1; }
+      #main .nav a .popover {
+        display: none; }
     #main .nav .main:before {
       font-family: 'icon';
       speak: none;
@@ -108,13 +119,6 @@ html, body {
       text-transform: none;
       line-height: 1;
       margin-left: .3em; }
-    #main .nav a {
-      opacity: .5;
-      transition: opacity .2s linear; }
-      #main .nav a:hover {
-        opacity: 1; }
-      #main .nav a .popover {
-        display: none; }
   #main .pageContent {
     padding: 1em 1.5em 1.5em;
     text-align: left; }
@@ -176,6 +180,8 @@ html, body {
     position: absolute;
     bottom: .2em;
     left: .5em; }
+    #main .controller a {
+      cursor: pointer; }
     #main .controller .play {
       margin: 0 .1em; }
       #main .controller .play:before {
@@ -206,21 +212,49 @@ html, body {
         font-variant: normal;
         text-transform: none;
         line-height: 1; }
+    #main .controller .prev {
+      margin: 0 .1em; }
+      #main .controller .prev:before {
+        font-family: 'icon';
+        speak: none;
+        font-style: normal;
+        font-weight: normal;
+        font-variant: normal;
+        text-transform: none;
+        line-height: 1; }
+    #main .controller .next {
+      margin: 0 .1em; }
+      #main .controller .next:before {
+        font-family: 'icon';
+        speak: none;
+        font-style: normal;
+        font-weight: normal;
+        font-variant: normal;
+        text-transform: none;
+        line-height: 1; }
     #main .controller a {
       opacity: .5;
-      transition: opacity .2s linear; }
+      transition: opacity .2s linear;
+      cursor: pointer; }
       #main .controller a:hover {
         opacity: 1; }
+      #main .controller a .popover {
+        display: none; }
   #main .bell {
     position: absolute;
     bottom: .2em;
     right: .4em;
     text-align: center;
-    width: 1.2em;
-    cursor: pointer;
-    opacity: .5;
-    transition: opacity .2s linear; }
-    #main .bell.on:before {
+    width: 1.2em; }
+    #main .bell a {
+      opacity: .5;
+      transition: opacity .2s linear;
+      cursor: pointer; }
+      #main .bell a:hover {
+        opacity: 1; }
+      #main .bell a .popover {
+        display: none; }
+    #main .bell .on:before {
       font-family: 'icon';
       speak: none;
       font-style: normal;
@@ -228,7 +262,7 @@ html, body {
       font-variant: normal;
       text-transform: none;
       line-height: 1; }
-    #main .bell.off:before {
+    #main .bell .off:before {
       font-family: 'icon';
       speak: none;
       font-style: normal;
@@ -236,8 +270,6 @@ html, body {
       font-variant: normal;
       text-transform: none;
       line-height: 1; }
-    #main .bell:hover {
-      opacity: 1; }
 
 #setting {
   position: relative;
@@ -251,6 +283,14 @@ html, body {
     position: absolute;
     top: .2em;
     right: .5em; }
+    #setting .nav a {
+      opacity: .5;
+      transition: opacity .2s linear;
+      cursor: pointer; }
+      #setting .nav a:hover {
+        opacity: 1; }
+      #setting .nav a .popover {
+        display: none; }
     #setting .nav .main:before {
       font-family: 'icon';
       speak: none;
@@ -287,13 +327,6 @@ html, body {
       text-transform: none;
       line-height: 1;
       margin-left: .3em; }
-    #setting .nav a {
-      opacity: .5;
-      transition: opacity .2s linear; }
-      #setting .nav a:hover {
-        opacity: 1; }
-      #setting .nav a .popover {
-        display: none; }
   #setting .pageContent {
     padding: 1em 1.5em 1.5em;
     text-align: left; }
@@ -335,6 +368,8 @@ html, body {
     transition: background-color .2s linear; }
     #setting .empty:hover {
       background-color: rgba(255, 255, 255, 0.2); }
+  #setting .topic a {
+    cursor: pointer; }
   #setting .topic .play {
     margin: 0 .1em; }
     #setting .topic .play:before {
@@ -365,6 +400,26 @@ html, body {
       font-variant: normal;
       text-transform: none;
       line-height: 1; }
+  #setting .topic .prev {
+    margin: 0 .1em; }
+    #setting .topic .prev:before {
+      font-family: 'icon';
+      speak: none;
+      font-style: normal;
+      font-weight: normal;
+      font-variant: normal;
+      text-transform: none;
+      line-height: 1; }
+  #setting .topic .next {
+    margin: 0 .1em; }
+    #setting .topic .next:before {
+      font-family: 'icon';
+      speak: none;
+      font-style: normal;
+      font-weight: normal;
+      font-variant: normal;
+      text-transform: none;
+      line-height: 1; }
   #setting .topic .time {
     cursor: pointer;
     font-family: monospace;
@@ -385,6 +440,14 @@ html, body {
     position: absolute;
     top: .2em;
     right: .5em; }
+    #usage .nav a {
+      opacity: .5;
+      transition: opacity .2s linear;
+      cursor: pointer; }
+      #usage .nav a:hover {
+        opacity: 1; }
+      #usage .nav a .popover {
+        display: none; }
     #usage .nav .main:before {
       font-family: 'icon';
       speak: none;
@@ -421,13 +484,6 @@ html, body {
       text-transform: none;
       line-height: 1;
       margin-left: .3em; }
-    #usage .nav a {
-      opacity: .5;
-      transition: opacity .2s linear; }
-      #usage .nav a:hover {
-        opacity: 1; }
-      #usage .nav a .popover {
-        display: none; }
   #usage .pageContent {
     padding: 1em 1.5em 1.5em;
     text-align: left; }
@@ -475,6 +531,14 @@ html, body {
     position: absolute;
     top: .2em;
     right: .5em; }
+    #info .nav a {
+      opacity: .5;
+      transition: opacity .2s linear;
+      cursor: pointer; }
+      #info .nav a:hover {
+        opacity: 1; }
+      #info .nav a .popover {
+        display: none; }
     #info .nav .main:before {
       font-family: 'icon';
       speak: none;
@@ -511,13 +575,6 @@ html, body {
       text-transform: none;
       line-height: 1;
       margin-left: .3em; }
-    #info .nav a {
-      opacity: .5;
-      transition: opacity .2s linear; }
-      #info .nav a:hover {
-        opacity: 1; }
-      #info .nav a .popover {
-        display: none; }
   #info .pageContent {
     padding: 1em 1.5em 1.5em;
     text-align: left; }
