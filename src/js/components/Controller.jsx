@@ -18,6 +18,7 @@ module.exports = React.createClass({
     };
   },
 
+  // TODO Store呼んでるのよくないっぽい
   isCounting: function() {
     var state = StateStore.get();
     return this.props.topic.equal( state.selected ) && state.counting;
@@ -41,13 +42,13 @@ module.exports = React.createClass({
 
   prev: function() {
     if (this.props.topic.prev) {
-      TimerActions.startCounting(this.props.topic.prev);
+      TimerActions.setTopic(this.props.topic.prev);
     }
   },
 
   next: function() {
     if (this.props.topic.next) {
-      TimerActions.startCounting(this.props.topic.next);
+      TimerActions.setTopic(this.props.topic.next);
     }
   },
 

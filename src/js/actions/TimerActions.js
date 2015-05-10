@@ -17,17 +17,25 @@ module.exports = {
     });
   },
 
+  // トピックをセットする
+  setTopic: function(topic) {
+    AppDispatcher.dispatch({
+      actionType: TimerConstants.STATES_UPDATE,
+      states: { selected: topic },
+    });
+  },
+
   // カウントを開始する
   startCounting: function(topic){
+    if (topic) {
+      this.setTopic(topic);
+    }
     clearInterval(_timer);
     this._scrollTop();
     _timer = setInterval(this.countDown, 1000);
     AppDispatcher.dispatch({
       actionType: TimerConstants.STATES_UPDATE,
-      states: {
-        selected: topic,
-        counting: true,
-      }
+      states: { counting: true },
     });
   },
 
