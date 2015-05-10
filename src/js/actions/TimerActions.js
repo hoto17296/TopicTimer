@@ -12,7 +12,7 @@ module.exports = {
   // トピック一覧を更新する
   updateTopics: function(str) {
     AppDispatcher.dispatch({
-      actionType: TimerConstants.TOPICS_UPDATE,
+      actionType: TimerConstants.UPDATE_TOPICS,
       topics: this._parseTopics(str)
     });
   },
@@ -20,7 +20,7 @@ module.exports = {
   // トピックをセットする
   setTopic: function(topic) {
     AppDispatcher.dispatch({
-      actionType: TimerConstants.STATES_UPDATE,
+      actionType: TimerConstants.UPDATE_STATES,
       states: { selected: topic },
     });
   },
@@ -34,7 +34,7 @@ module.exports = {
     this._scrollTop();
     _timer = setInterval(this.countDown, 1000);
     AppDispatcher.dispatch({
-      actionType: TimerConstants.STATES_UPDATE,
+      actionType: TimerConstants.UPDATE_STATES,
       states: { counting: true },
     });
   },
@@ -43,7 +43,7 @@ module.exports = {
   pauseCounting: function() {
     clearInterval(_timer);
     AppDispatcher.dispatch({
-      actionType: TimerConstants.STATES_UPDATE,
+      actionType: TimerConstants.UPDATE_STATES,
       states: {
         counting: false,
       }
@@ -66,7 +66,7 @@ module.exports = {
     var state = StateStore.get();
     if (state.selected) {
       AppDispatcher.dispatch({
-        actionType: TimerConstants.COUNTDOWN,
+        actionType: TimerConstants.COUNTDOWN_TOPIC,
         topic: state.selected,
         callback: function(remainTime) {
           if (remainTime === 0 && state.bell) {

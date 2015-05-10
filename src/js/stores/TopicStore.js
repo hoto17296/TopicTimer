@@ -35,7 +35,7 @@ AppDispatcher.register(function(action) {
 
   switch(action.actionType) {
 
-    case TimerConstants.TOPICS_UPDATE:
+    case TimerConstants.UPDATE_TOPICS:
       if (action.topics) {
         _topics = action.topics;
         TopicStore.emitChange();
@@ -51,7 +51,7 @@ AppDispatcher.register(function(action) {
       TopicStore.emitChange();
       break;
 
-    case TimerConstants.COUNTDOWN:
+    case TimerConstants.COUNTDOWN_TOPIC:
       var remainTime = action.topic.remain.decrease();
       if (typeof(action.callback) == 'function') {
         action.callback(remainTime);

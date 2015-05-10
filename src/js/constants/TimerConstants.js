@@ -1,9 +1,9 @@
 var keyMirror = require('keymirror');
 
 module.exports = keyMirror({
-  TOPICS_UPDATE: null,
-  STATES_UPDATE: null,
-  RESET_TOPIC: null,
-  COWNTDOWN: null,
-  TOGGLE_BELL: null
+  UPDATE_TOPICS:   null,
+  UPDATE_STATES:   null,
+  RESET_TOPIC:     null,
+  COWNTDOWN_TOPIC: null,
+  TOGGLE_BELL:     null
 });

@@ -46,14 +46,14 @@ AppDispatcher.register(function(action) {
 
   switch(action.actionType) {
 
-    case TimerConstants.STATES_UPDATE:
+    case TimerConstants.UPDATE_STATES:
       if (action.states) {
         setStates(action.states);
         StateStore.emitChange();
       }
       break;
 
-    case TimerConstants.TOPICS_UPDATE:
+    case TimerConstants.UPDATE_TOPICS:
       if (action.topics && _states.selected) {
         var selected = null;
         action.topics.map(function(topic){
